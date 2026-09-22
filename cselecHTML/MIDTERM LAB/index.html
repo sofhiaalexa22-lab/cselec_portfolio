@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sofhia Alexa Avila — Portfolio</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main id="home-view" class="view">
+
+   
+    <header class="hero">
+      <div class="hero-left">
+        <img src="photo/profile.jpg" alt="Sofhia Alexa Avila" class="avatar">
+        <div class="hero-text">
+          <h1>Sofhia Alexa Avila</h1>
+          <p class="location">Muntinlupa City, Metro Manila, Philippines</p>
+          <p class="tagline">Aspiring Full-Stack Developer &nbsp;|&nbsp; CS Student &nbsp;|&nbsp; Web Development Enthusiast</p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">📅 Schedule a Call</a>
+            <a href="mailto:sofhiaalexa22@gmail.com" class="btn btn-secondary">✉️ Send Email</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-controls">
+        <button id="theme-toggle" class="theme-icon" aria-label="Toggle light and dark mode">🌙</button>
+        <button id="chat-toggle" class="chat-icon" aria-label="Open chat">💬</button>
+      </div>
+    </header>
+
+    
+    <section class="grid-2">
+      <div class="card">
+        <h2>About Me</h2>
+        <p>I'm a Computer Science student based in Muntinlupa City with a growing passion for web
+          development. Since senior high school, I've been building systems that solve real,
+          everyday problems — from ordering platforms to account-security features — and I'm
+          currently sharpening my front-end and back-end skills. I'm always looking for
+          opportunities to learn, build, and grow as a developer.</p>
+      </div>
+      <div class="card">
+        <h2>Experience</h2>
+        <div class="timeline-item">
+          <div class="timeline-header">
+            <h3>Systems Developer — Academic &amp; Personal Projects</h3>
+            <span class="year">Senior High School – Present</span>
+          </div>
+          <p>Designing and building full-stack systems for real school needs, combining
+            front-end interfaces with back-end logic to solve practical problems.</p>
+        </div>
+      </div>
+    </section>
+
+   
+    <section class="card">
+      <div class="section-header">
+        <h2>Projects</h2>
+      </div>
+      <div class="project-grid">
+        <div class="project-card">
+          <h3>Ordering Management System</h3>
+          <p class="project-sub">Verto's Grill Canteen · Lyceum of Alabang</p>
+          <p>Developed and evaluated a web-based ordering and management system that
+            streamlines order-taking and tracking for canteen staff.</p>
+        </div>
+        <div class="project-card">
+          <h3>Liveness-Based Facial Recognition</h3>
+          <p class="project-sub">Account Recovery · PLMun Portal</p>
+          <p>Built a smile-and-blink liveness detection feature for secure account recovery
+            on the Pamantasan ng Lungsod ng Muntinlupa student portal.</p>
+        </div>
+        <div class="project-card">
+          <h3>Student Document Request System</h3>
+          <p class="project-sub">School Document Processing</p>
+          <p>Created a system that lets students request and track official school documents
+            online, replacing manual, in-person processing.</p>
+        </div>
+      </div>
+    </section>
+
+   
+    <section class="grid-2">
+      <div class="card">
+        <div class="section-header">
+          <h2>Tech Stack</h2>
+          <button id="view-stack" class="view-all">View Full Stack →</button>
+        </div>
+        <div class="stack-preview">
+          <div>
+            <h4>Frontend</h4>
+            <div class="tags">
+              <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+            </div>
+          </div>
+          <div>
+            <h4>Backend</h4>
+            <div class="tags">
+              <span class="tag">C++</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Education</h2>
+        <p>BS Computer Science — 3rd Year Student</p>
+        <p class="muted">Certifications coming soon — currently focused on leveling up
+          through hands-on projects.</p>
+      </div>
+    </section>
+
+    
+    <section id="contact" class="card contact-card">
+      <div>
+        <h2>Let's work together.</h2>
+        <p>Open to internships, student projects, and freelance opportunities where I can
+          learn and contribute.</p>
+      </div>
+      <div class="contact-actions">
+        <a href="mailto:sofhiaalexa22@gmail.com" class="btn btn-primary">✉️ sofhiaalexa22@gmail.com</a>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2026 Sofhia Alexa Avila. All Rights Reserved.</p>
+    </footer>
+  </main>
+
+
+  <main id="stack-view" class="view hidden">
+    <button id="back-home" class="back-link">← Back to Home</button>
+    <h1>Full Tech Stack</h1>
+    <p class="muted">Comprehensive list of tools and technologies I use.</p>
+
+    <div class="grid-2 stack-full">
+      <div class="card">
+        <h2>Frontend</h2>
+        <div class="tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Backend</h2>
+        <div class="tags">
+          <span class="tag">C++</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+ 
+  <div id="chat-box" class="chat-box hidden">
+    <div class="chat-box-header">
+      <span>Chat with Sofhia</span>
+      <button id="chat-close" aria-label="Close chat">×</button>
+    </div>
+    <div class="chat-box-body" id="chat-body">
+      <div class="chat-msg bot">Hi there! I'm Sofhia. Thanks for checking out my
+        portfolio! Feel free to ask me about my projects, tools, or how to reach me.</div>
+    </div>
+    <form id="chat-form" class="chat-box-input">
+      <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off">
+      <button type="submit">➤</button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

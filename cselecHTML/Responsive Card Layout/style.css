@@ -1,0 +1,120 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    color: #222;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+header h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #4361ee, #7209b7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+
+.student-container {
+    max-width: 1200px;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1 fr);
+    gap: 20px;
+    align-items: stretch;
+}
+
+.student-card {
+    width: 100%;
+    background-color: white;
+    padding: 30px;
+    border: 2px solid #333;
+    border-radius: 12px;
+    text-align: left;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    transition: 0.3s;
+}
+
+.student-card h1 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 28px;
+}
+.student-card h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #222;
+}
+.student-card h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #555;
+    font-size: 18px;
+}
+.student-card h4 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+.bio {
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+.student-card p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+.career {
+    font-weight: bold;
+    color: #1f416e;
+}
+.skills {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.skills li {
+    background-color: #eee;
+    padding: 10px 12px;
+    margin: 8px 0;
+    border-radius: 6px;
+    font-weight: 500;
+}
+.student-card:hover {
+    border-color: #555;
+    transform: translateY(-8px);
+}
+
+.student-card img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .student-container {
+        width: calc(100% - 24px);
+        grid-template-columns: 1fr;
+        padding: 20px 12px;
+        gap: 16px;
+    }
+
+    .student-card {
+        padding: 22px;
+    }
+}

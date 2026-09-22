@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Menu Computations</title>
+</head>
+
+<body>
+
+<h2>Simple Menu with Computations</h2>
+
+<button onclick="showMenu()">Open Menu</button>
+
+<p id="result"></p>
+
+<script>
+
+function showMenu() {
+
+    let choice = prompt(
+        "Choose an operation:\n" +
+        "1. Addition\n" +
+        "2. Subtraction\n" +
+        "3. Multiplication\n" +
+        "4. Division\n" +
+        "5. Modulo"
+    );
+
+    let num1 = Number(prompt("Enter first number:"));
+    let num2 = Number(prompt("Enter second number:"));
+
+    let result;
+
+    switch (choice) {
+
+        case "1":
+            result = num1 + num2;
+            break;
+
+        case "2":
+            result = num1 - num2;
+            break;
+
+        case "3":
+            result = num1 * num2;
+            break;
+
+        case "4":
+            result = num2 === 0
+                ? "Cannot divide by zero!"
+                : num1 / num2;
+            break;
+
+        case "5":
+            result = num2 === 0
+                ? "Cannot modulo by zero!"
+                : num1 % num2;
+            break;
+
+        default:
+            result = "Invalid choice!";
+    }
+
+    document.getElementById("result").innerText =
+        "Result: " + result;
+}
+
+</script>
+
+</body>
+</html>

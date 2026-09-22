@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PLMUN Student Portal: Register Face</title>
+    <link rel="stylesheet" href="recovery.css" />
+    <link rel="icon" type="image/jpg" href="Project/plmun logo 96x96.jpg" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+  </head>
+  <body>
+    <div class="page">
+      <div class="topbar">
+        <img src="Project/logo.png" height="50" alt="PLMUN Logo" />
+        <div>
+          <p>PLMUN</p>
+          <p>PAMANTASAN NG LUNGSOD NG MUNTINLUPA</p>
+        </div>
+      </div>
+
+      <div class="facial-recognition-container">
+        <div class="fr-header">
+          <h1>📸 Register Your Face</h1>
+          <p>
+            Register your face for secure facial recognition login and account
+            recovery.
+          </p>
+        </div>
+
+        <!-- Verification Section -->
+        <div id="verificationSection" class="verification-section">
+          <div
+            class="card"
+            style="width: 100%; max-width: 400px; margin: 20px auto"
+          >
+            <h3>Step 1: Verify Your Account</h3>
+            <p style="color: #aaa; font-size: 14px">
+              Enter your student number and PIN to verify your account and
+              register your face in the database
+            </p>
+
+            <label>Student Number</label>
+            <div class="input-group">
+              <span class="icon">👤</span>
+              <input
+                id="regStudentNumber"
+                type="text"
+                placeholder="Enter your student number"
+              />
+            </div>
+
+            <label>PIN Number</label>
+            <div class="input-group">
+              <span class="icon">🔑</span>
+              <input
+                id="regPinNumber"
+                type="password"
+                placeholder="Enter your PIN"
+              />
+            </div>
+
+            <button
+              id="verifyBtn"
+              type="button"
+              class="btn btn-primary"
+              style="width: 100%; margin-top: 10px"
+            >
+              ✅ Verify Account & Continue
+            </button>
+            <div
+              id="verifyMessage"
+              class="login-message"
+              style="display: none; margin-top: 10px"
+            ></div>
+          </div>
+        </div>
+
+        <!-- Face Registration Section -->
+        <div
+          id="faceRegistrationSection"
+          class="facial-recognition-container"
+          style="display: none"
+        >
+          <div class="fr-header">
+            <h2>Step 2: Capture Your Face</h2>
+            <p>
+              Position your face clearly in the camera frame for registration
+            </p>
+          </div>
+
+          <div class="fr-content">
+            <div class="camera-section">
+              <div class="camera-wrapper">
+                <video id="webcam" autoplay playsinline muted></video>
+                <canvas id="canvas" style="display: none"></canvas>
+                <div class="face-guide">
+                  <div class="guide-ring"></div>
+                  <p class="guide-text">Align your face inside the circle</p>
+                </div>
+                <div id="status-indicator" class="status-idle">Ready</div>
+              </div>
+            </div>
+
+            <div class="controls-section">
+              <button id="startBtn" class="btn btn-primary">
+                🎥 Start Camera
+              </button>
+              <button id="stopBtn" class="btn btn-secondary" disabled>
+                ⏹ Stop Camera
+              </button>
+            </div>
+
+            <div
+              class="results-section"
+              id="resultsSection"
+              style="display: none"
+            >
+              <h3>Face Detection Status</h3>
+              <div id="detectionResults" class="detection-results">
+                <p>No faces detected yet</p>
+              </div>
+              <button
+                id="captureBtn"
+                class="btn btn-success"
+                style="display: none; width: 100%; margin-top: 10px"
+              >
+                📸 Capture & Register Face
+              </button>
+            </div>
+
+            <div class="info-section">
+              <h3>Instructions</h3>
+              <ul>
+                <li>Click "Start Camera" to enable your webcam</li>
+                <li>Position your face clearly in the circle guide</li>
+                <li>Ensure good lighting for accurate face capture</li>
+                <li>Keep a neutral expression</li>
+                <li>Click "Capture & Register Face" when ready</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Success Section -->
+        <div id="successSection" style="display: none">
+          <div class="success-container">
+            <div class="success-icon">✅</div>
+            <h2>Face Registration Successful!</h2>
+            <p>
+              Your face has been registered successfully. You can now use facial
+              recognition for login and account recovery.
+            </p>
+            <a
+              href="index.html"
+              class="btn btn-success"
+              style="display: inline-block; margin-top: 20px"
+            >
+              👉 Go to Login
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Face Registration Manager
+      class FaceRegistrationManager {
+        constructor() {
+          this.video = document.getElementById("webcam");
+          this.canvas = document.getElementById("canvas");
+          this.startBtn = document.getElementById("startBtn");
+          this.stopBtn = document.getElementById("stopBtn");
+          this.captureBtn = document.getElementById("captureBtn");
+          this.verifyBtn = document.getElementById("verifyBtn");
+          this.statusIndicator = document.getElementById("status-indicator");
+          this.resultsSection = document.getElementById("resultsSection");
+          this.detectionResults = document.getElementById("detectionResults");
+          this.verificationSection = document.getElementById(
+            "verificationSection",
+          );
+          this.faceRegistrationSection = document.getElementById(
+            "faceRegistrationSection",
+          );
+          this.successSection = document.getElementById("successSection");
+          this.verifyMessage = document.getElementById("verifyMessage");
+
+          this.regStudentNumber = document.getElementById("regStudentNumber");
+          this.regPinNumber = document.getElementById("regPinNumber");
+
+          this.apiBase = window.location.protocol.startsWith("http")
+            ? ""
+            : "http://localhost:3000";
+          this.stream = null;
+          this.modelsLoaded = false;
+          this.detectionInterval = null;
+          this.faceDataArray = [];
+          this.studentNumber = null;
+          this.pinNumber = null;
+
+          this.initEventListeners();
+          if (this.startBtn) {
+            this.startBtn.disabled = true;
+          }
+          this.loadModels();
+        }
+
+        initEventListeners() {
+          this.verifyBtn.addEventListener("click", () =>
+            this.verifyCredentials(),
+          );
+          this.startBtn.addEventListener("click", () => this.startCamera());
+          this.stopBtn.addEventListener("click", () => this.stopCamera());
+          this.captureBtn.addEventListener("click", () => this.registerFace());
+        }
+
+        async loadModels() {
+          if ("faceapi" in window) {
+            try {
+              const MODEL_URL =
+                "https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights";
+              await Promise.all([
+                faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
+                faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
+                faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
+                faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
+              ]);
+              this.modelsLoaded = true;
+              console.log("Face detection models loaded successfully");
+            } catch (error) {
+              console.error("Error loading models:", error);
+            }
+          } else {
+            console.error("Face API not loaded from CDN");
+          }
+        }
+
+        async verifyCredentials() {
+          const studentNumber = this.regStudentNumber.value.trim();
+          const pin = this.regPinNumber.value.trim();
+
+          if (!studentNumber || !pin) {
+            this.showVerifyMessage(
+              "Please enter both student number and PIN",
+              "error",
+            );
+            return;
+          }
+
+          this.verifyBtn.disabled = true;
+          this.verifyBtn.textContent = "Verifying Account...";
+
+          try {
+            const response = await fetch(`${this.apiBase}/verify-credentials`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ studentNumber, pin }),
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+              this.studentNumber = studentNumber;
+              this.pinNumber = pin;
+              this.showVerifyMessage(
+                "Account verified successfully! Proceeding to face registration...",
+                "success",
+              );
+
+              setTimeout(() => {
+                this.verificationSection.style.display = "none";
+                this.faceRegistrationSection.style.display = "block";
+                if (this.startBtn) {
+                  this.startBtn.disabled = false;
+                }
+              }, 1500);
+            } else {
+              const registerResponse = await fetch(`${this.apiBase}/register`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ studentNumber, pin }),
+              });
+
+              const registerData = await registerResponse.json();
+
+              if (registerData.success) {
+                this.studentNumber = studentNumber;
+                this.pinNumber = pin;
+                this.showVerifyMessage(
+                  "Account created successfully! Proceeding to face registration...",
+                  "success",
+                );
+
+                setTimeout(() => {
+                  this.verificationSection.style.display = "none";
+                  this.faceRegistrationSection.style.display = "block";
+                  if (this.startBtn) {
+                    this.startBtn.disabled = false;
+                  }
+                }, 1500);
+              } else {
+                this.showVerifyMessage(
+                  registerData.error ||
+                    data.error ||
+                    "Failed to verify or create account.",
+                  "error",
+                );
+              }
+            }
+          } catch (error) {
+            console.error("Account verification error:", error);
+            this.showVerifyMessage(
+              "Error verifying account. Please try again.",
+              "error",
+            );
+          } finally {
+            this.verifyBtn.disabled = false;
+            this.verifyBtn.textContent = "✅ Verify Account & Continue";
+          }
+        }
+
+        showVerifyMessage(message, type) {
+          this.verifyMessage.style.display = "block";
+          this.verifyMessage.textContent = message;
+          this.verifyMessage.className = "login-message " + type;
+        }
+
+        async startCamera() {
+          try {
+            this.stream = await navigator.mediaDevices.getUserMedia({
+              video: { width: { ideal: 640 }, height: { ideal: 480 } },
+            });
+            this.video.srcObject = this.stream;
+            this.startBtn.disabled = true;
+            this.stopBtn.disabled = false;
+            this.resultsSection.style.display = "block";
+            this.setStatusIndicator("Camera Active", "active");
+            this.startDetection();
+          } catch (error) {
+            alert("Could not access webcam: " + error.message);
+          }
+        }
+
+        stopCamera() {
+          if (this.stream) {
+            this.stream.getTracks().forEach((track) => track.stop());
+            this.stream = null;
+          }
+          this.startBtn.disabled = false;
+          this.stopBtn.disabled = true;
+          this.video.srcObject = null;
+          this.setStatusIndicator("Camera Stopped", "idle");
+          this.clearDetection();
+          this.resultsSection.style.display = "none";
+          this.captureBtn.style.display = "none";
+          this.faceDataArray = [];
+        }
+
+        startDetection() {
+          this.detectionInterval = setInterval(() => this.detectFace(), 100);
+        }
+
+        clearDetection() {
+          if (this.detectionInterval) {
+            clearInterval(this.detectionInterval);
+            this.detectionInterval = null;
+          }
+        }
+
+        async detectFace() {
+          if (!this.modelsLoaded || !this.video.srcObject) return;
+
+          try {
+            const detections = await faceapi
+              .detectAllFaces(this.video, new faceapi.TinyFaceDetectorOptions())
+              .withFaceLandmarks()
+              .withFaceExpressions();
+
+            if (detections.length > 0) {
+              this.setStatusIndicator("Face Detected ✓", "detected");
+              this.detectionResults.innerHTML = `
+                <p>✓ Face detected</p>
+                <p>Confidence: ${(detections[0].detection.score * 100).toFixed(2)}%</p>
+              `;
+              this.captureBtn.style.display = "block";
+
+              // Store face data for registration
+              if (this.faceDataArray.length < 30) {
+                this.faceDataArray.push(detections[0]);
+              }
+            } else {
+              this.setStatusIndicator("No Face Detected", "idle");
+              this.detectionResults.innerHTML =
+                "<p>Position your face in the circle</p>";
+              this.captureBtn.style.display = "none";
+            }
+          } catch (error) {
+            console.error("Detection error:", error);
+            this.setStatusIndicator("Detection Error", "error");
+          }
+        }
+
+        setStatusIndicator(status, type) {
+          this.statusIndicator.textContent = status;
+          this.statusIndicator.className = "status-indicator status-" + type;
+        }
+
+        async registerFace() {
+          if (this.faceDataArray.length === 0) {
+            alert(
+              "No face data captured. Please position your face in the camera.",
+            );
+            return;
+          }
+
+          this.captureBtn.disabled = true;
+          this.captureBtn.textContent = "⏳ Registering...";
+
+          try {
+            // Capture face image from canvas
+            const ctx = this.canvas.getContext("2d");
+            this.canvas.width = this.video.videoWidth;
+            this.canvas.height = this.video.videoHeight;
+            ctx.drawImage(this.video, 0, 0);
+            const faceImage = this.canvas.toDataURL("image/jpeg");
+
+            // Extract face encoding from detection data
+            const faceData = {
+              image: faceImage,
+              detection: {
+                score: this.faceDataArray[0].detection.score,
+                landmarks: this.faceDataArray[0].landmarks.positions,
+              },
+            };
+
+            // Send to backend
+            const response = await fetch(`${this.apiBase}/register-face`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                studentNumber: this.studentNumber,
+                pin: this.pinNumber,
+                faceData: faceData,
+              }),
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+              this.stopCamera();
+              this.faceRegistrationSection.style.display = "none";
+              this.successSection.style.display = "block";
+            } else {
+              alert(
+                "Error registering face: " + (result.error || "Unknown error"),
+              );
+            }
+          } catch (error) {
+            console.error("Registration error:", error);
+            alert("Error during face registration: " + error.message);
+          } finally {
+            this.captureBtn.disabled = false;
+            this.captureBtn.textContent = "📸 Capture & Register Face";
+          }
+        }
+      }
+
+      // Initialize on page load
+      document.addEventListener("DOMContentLoaded", () => {
+        new FaceRegistrationManager();
+      });
+    </script>
+  </body>
+</html>

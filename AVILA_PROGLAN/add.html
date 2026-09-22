@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Addition</title>
+</head>
+
+<body id="add">
+    <h2>Addition Page</h2>
+
+    <label for="num1">First Number:</label>
+    <input type="number" id="num1"><br><br>
+
+    <label for="num2">Second Number:</label>
+    <input type="number" id="num2"><br><br>
+
+    <button onclick="addNumbers()">Calculate</button>
+    <button onclick="location.href='menu.html'">Back to Menu</button>
+
+    <p id="result"></p>
+
+    <script>
+        function addNumbers() {
+            let n1 = Number(document.getElementById("num1").value);
+            let n2 = Number(document.getElementById("num2").value);
+
+            let result = n1 + n2;
+
+            document.getElementById("result").innerHTML = "Result: " + result;
+            document.getElementById("result").style.color = "red";
+            document.getElementById("result").style.fontSize = "20px";
+            document.getElementById("add").style.backgroundColor = "yellow";
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subtraction</title>
+</head>
+
+<body>
+    <h2>Subtraction Page</h2>
+
+    <label for="num1">First Number:</label>
+    <input type="number" id="num1"><br><br>
+
+    <label for="num2">Second Number:</label>
+    <input type="number" id="num2"><br><br>
+
+    <button onclick="subtractNumbers()">Calculate</button>
+    <button onclick="location.href='menu.html'">Back to Menu</button>
+
+    <p id="result"></p>
+
+    <script>
+        function subtractNumbers() {
+            let n1 = Number(document.getElementById("num1").value);
+            let n2 = Number(document.getElementById("num2").value);
+
+            let result = n1 - n2;
+
+            document.getElementById("result").innerHTML = "Result: " + result;
+        }
+    </script>
+
+</body>
+</html>

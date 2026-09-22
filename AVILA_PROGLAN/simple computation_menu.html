@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Simple Computation Menu</title>
+</head>
+
+<body>
+
+<h2>Simple Computation Menu</h2>
+
+<label>Enter first number:</label>
+<input type="number" id="num1"><br>
+
+<label>Enter second number:</label>
+<input type="number" id="num2"><br>
+
+<button onclick="add()">Addition</button>
+<button onclick="subtract()">Subtraction</button>
+<button onclick="multiply()">Multiplication</button>
+<button onclick="divide()">Division</button>
+<button onclick="modulo()">Modulo</button>
+
+<h3>Result: <span id="sagot"></span></h3>
+
+<script>
+
+function add() {
+    let a = parseFloat(document.getElementById("num1").value);
+    let b = parseFloat(document.getElementById("num2").value);
+
+    document.getElementById("sagot").textContent = a + b;
+}
+
+function subtract() {
+    let a = parseFloat(document.getElementById("num1").value);
+    let b = parseFloat(document.getElementById("num2").value);
+
+    document.getElementById("sagot").textContent = a - b;
+}
+
+function multiply() {
+    let a = parseFloat(document.getElementById("num1").value);
+    let b = parseFloat(document.getElementById("num2").value);
+
+    document.getElementById("sagot").textContent = a * b;
+}
+
+function divide() {
+    let a = parseFloat(document.getElementById("num1").value);
+    let b = parseFloat(document.getElementById("num2").value);
+
+    document.getElementById("sagot").textContent =
+        b !== 0 ? a / b : "Cannot divide by 0";
+}
+
+function modulo() {
+    let a = parseFloat(document.getElementById("num1").value);
+    let b = parseFloat(document.getElementById("num2").value);
+
+    document.getElementById("sagot").textContent =
+        b !== 0 ? a % b : "Cannot modulo by 0";
+}
+
+</script>
+
+</body>
+</html>

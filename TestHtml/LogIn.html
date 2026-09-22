@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="images/sbp logo.png" />
+    <title>Semaj Bank of the Philippines</title>
+  </head>
+  <body>
+    <header>
+      <h1>Semaj Bank of the Philippines</h1>
+      <h3>Welcome!</h3>
+      <a href="index.html">Home</a>
+      <a href="">Contact Us</a>
+      <a href="">Privacy Policy</a>
+    </header>
+    <main>
+      <form action="process.php" method="post">
+        <label for="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="user_123"
+          minlength="8"
+          maxlength="10"
+          required
+        />
+        <br />
+
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          minlength="8"
+          maxlength="8"
+          required
+        />
+        <br />
+
+        <button type="submit">Login</button>
+        <br />
+        <button type="button" onclick="window.location.href = 'register.html'">
+          Register
+        </button>
+      </form>
+    </main>
+  </body>
+</html>
