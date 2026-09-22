@@ -8,10 +8,19 @@
 </head>
 <body>
 
-  <main id="home-view" class="view">
+    <main id="home-view" class="view">
 
-   
-    <header class="hero">
+    <nav class="navbar">
+      <span class="nav-brand"></span>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#projects">Project</a>
+        <a href="#stack">Stack</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+        <header class="hero">
       <div class="hero-left">
         <img src="photo/profile.jpg" alt="Sofhia Alexa Avila" class="avatar">
         <div class="hero-text">
@@ -19,8 +28,8 @@
           <p class="location">Muntinlupa City, Metro Manila, Philippines</p>
           <p class="tagline">Aspiring Full-Stack Developer &nbsp;|&nbsp; CS Student &nbsp;|&nbsp; Web Development Enthusiast</p>
           <div class="hero-actions">
-            <a href="#contact" class="btn btn-primary">📅 Schedule a Call</a>
-            <a href="mailto:sofhiaalexa22@gmail.com" class="btn btn-secondary">✉️ Send Email</a>
+            <a href="#contact" class="btn btn-primary">Schedule a Call</a>
+            <a href="mailto:sofhiaalexa22@gmail.com" class="btn btn-secondary">Send Email</a>
           </div>
         </div>
       </div>
@@ -30,9 +39,8 @@
       </div>
     </header>
 
-    
-    <section class="grid-2">
-      <div class="card">
+        <section class="grid-2">
+      <div class="card" id="about">
         <h2>About Me</h2>
         <p>I'm a Computer Science student based in Muntinlupa City with a growing passion for web
           development. Since senior high school, I've been building systems that solve real,
@@ -53,8 +61,7 @@
       </div>
     </section>
 
-   
-    <section class="card">
+        <section class="card" id="projects">
       <div class="section-header">
         <h2>Projects</h2>
       </div>
@@ -80,9 +87,8 @@
       </div>
     </section>
 
-   
-    <section class="grid-2">
-      <div class="card">
+        <section class="grid-2">
+      <div class="card" id="stack">
         <div class="section-header">
           <h2>Tech Stack</h2>
           <button id="view-stack" class="view-all">View Full Stack →</button>
@@ -110,8 +116,7 @@
       </div>
     </section>
 
-    
-    <section id="contact" class="card contact-card">
+        <section id="contact" class="card contact-card">
       <div>
         <h2>Let's work together.</h2>
         <p>Open to internships, student projects, and freelance opportunities where I can
@@ -127,8 +132,7 @@
     </footer>
   </main>
 
-
-  <main id="stack-view" class="view hidden">
+    <main id="stack-view" class="view hidden">
     <button id="back-home" class="back-link">← Back to Home</button>
     <h1>Full Tech Stack</h1>
     <p class="muted">Comprehensive list of tools and technologies I use.</p>
@@ -151,8 +155,7 @@
     </div>
   </main>
 
- 
-  <div id="chat-box" class="chat-box hidden">
+    <div id="chat-box" class="chat-box hidden">
     <div class="chat-box-header">
       <span>Chat with Sofhia</span>
       <button id="chat-close" aria-label="Close chat">×</button>

@@ -1,4 +1,3 @@
-// ---- Light / dark mode toggle ----
 const themeToggle = document.getElementById('theme-toggle');
 const root = document.documentElement;
 
@@ -16,7 +15,6 @@ let savedTheme = 'dark';
 try {
   savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
 } catch (e) {
-  // localStorage unavailable — default to dark, no persistence
 }
 applyTheme(savedTheme);
 
@@ -24,10 +22,9 @@ themeToggle.addEventListener('click', () => {
   const isLight = root.getAttribute('data-theme') === 'light';
   const next = isLight ? 'dark' : 'light';
   applyTheme(next);
-  try { localStorage.setItem('portfolio-theme', next); } catch (e) { /* ignore */ }
+  try { localStorage.setItem('portfolio-theme', next); } catch (e) {}
 });
 
-// ---- View switching (Home <-> Full Tech Stack) ----
 const homeView = document.getElementById('home-view');
 const stackView = document.getElementById('stack-view');
 const viewStackBtn = document.getElementById('view-stack');
@@ -45,7 +42,6 @@ backHomeBtn.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// ---- Chat widget ----
 const chatToggle = document.getElementById('chat-toggle');
 const chatBox = document.getElementById('chat-box');
 const chatClose = document.getElementById('chat-close');
@@ -56,7 +52,6 @@ const chatBody = document.getElementById('chat-body');
 chatToggle.addEventListener('click', () => chatBox.classList.toggle('hidden'));
 chatClose.addEventListener('click', () => chatBox.classList.add('hidden'));
 
-// Simple canned-response bot — swap this for a real API call if you want it live.
 const responses = [
   { keys: ['project', 'projects'], reply: "I've built an ordering system for a school canteen, a facial-recognition account-recovery feature, and a student document request system — check the Projects section above!" },
   { keys: ['tech', 'stack', 'tools', 'skill'], reply: "On the frontend I use HTML, CSS, and JavaScript, and I work with C++ on the backend. Click 'View Full Stack' to see it all." },
